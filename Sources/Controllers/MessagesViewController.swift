@@ -23,7 +23,7 @@
  */
 
 import UIKit
-import MessageInputBar
+//import MessageInputBar
 
 /// A subclass of `UIViewController` with a `MessagesCollectionView` object
 /// that is used to display conversation interfaces.
@@ -224,9 +224,9 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
         }
 
         switch kind {
-        case UICollectionView.elementKindSectionHeader:
+        case UICollectionElementKindSectionHeader:
             return displayDelegate.messageHeaderView(for: indexPath, in: messagesCollectionView)
-        case UICollectionView.elementKindSectionFooter:
+        case UICollectionElementKindSectionFooter:
             return displayDelegate.messageFooterView(for: indexPath, in: messagesCollectionView)
         default:
             fatalError(MessageKitError.unrecognizedSectionKind)
@@ -301,11 +301,11 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     private func addObservers() {
         NotificationCenter.default.addObserver(
-            self, selector: #selector(clearMemoryCache), name: UIApplication.didReceiveMemoryWarningNotification, object: nil)
+            self, selector: #selector(clearMemoryCache), name: NSNotification.Name.UIApplicationDidReceiveMemoryWarning, object: nil)
     }
     
     private func removeObservers() {
-        NotificationCenter.default.removeObserver(self, name: UIApplication.didReceiveMemoryWarningNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidReceiveMemoryWarning, object: nil)
     }
     
     @objc private func clearMemoryCache() {
